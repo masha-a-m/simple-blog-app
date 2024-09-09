@@ -1,23 +1,27 @@
 from django.db import models
+from django.db.models.query import BaseIterable
 from django.contrib.auth.models import User
 from django.db.models.deletion import SET_NULL
+from django.utils import tree
 
 # Create your models here.
 class Post(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
     body = models.TextField()
+    slug = models.SlugField()
+    image = models.ImageField( upload_to = 'pics', default = 'static/image/fs1.jpg')
+    writer = models.ForeignKey(User, on_delete=models.SET_NULL, null = True, blank=True)
+    trending = models.BooleanField(default = False)
     date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField()
-    trending = models.BooleanField(default=False)
-    writer = models.ForeignKey(User, on_delete=SET_NULL, null = True, blank=True)
-    slug = models.SlugField(default="slug")
 
     def __str__(self):
         return self.title
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete = models.CASCADE)
-    body = models.TextField()
+    # user = models.ForeignKey(User, on_delete = models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.body
+        return self.text

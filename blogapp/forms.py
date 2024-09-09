@@ -1,10 +1,11 @@
 from django import forms
-from .models import Comment
+from django.forms import ModelForm, fields
+from . models import Comment
 
-class CommentForm(forms.ModelForm):
+class CommentForm(ModelForm):
     body = forms.CharField(max_length=500, widget=forms.Textarea(attrs={
-        "class": "form-control", "rows": 3, "placeholder": "Join the discussion and leave a comment!"
+        "class":"form-control", "rows": "3", "placeholder": "Join the discussion and leave a comment!"
     }))
     class Meta:
         model = Comment
-        fields = ['body']
+        fields = ['body', ]

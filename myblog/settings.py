@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@t+3nf#)9&$c3#+1fp#r!bajvo=$805r=_e-=v*(n7i%)zxl@=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['simpleblogapp-d7dbdee0e375.herokuapp.com', 'localhost', '127.0.0.1:8001']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1:8001', 'simpleblogapp-d7dbdee0e375.herokuapp.com']
 
 
 # Application definition
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,10 +98,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'my_db',
-        'PORT': 5432,
-        'HOST': 'database-1.cxw00kuuw910.eu-north-1.rds.amazonaws.com',
+        'PASSWORD': 'Sumybaddo12',
         'USER': 'Maryam',
-        'PASSWORD': 'Sumybaddo12'
+        'PORT': 5432,
+        'HOST': 'database-1.cxw00kuuw910.eu-north-1.rds.amazonaws.com'
     }
 }
 
@@ -135,6 +135,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -145,10 +147,10 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [BASE_DIR/'static']
 MEDIA_URL = '/image/'
-MEDIA_ROOT = BASE_DIR/'static/image'
+MEDIA_ROOT = BASE_DIR/'media/pics'
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
