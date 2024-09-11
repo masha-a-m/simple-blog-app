@@ -18,7 +18,7 @@ AWS_ACCESS_KEY_ID = os.getenv('AKIASE5KQ3VNADKMKJIB')
 AWS_SECRET_ACCESS_KEY = os.getenv('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')
 AWS_STORAGE_BUCKET_NAME = os.getenv('my-django-media-files')
 AWS_S3_REGION_NAME = os.getenv('Europe (Stockholm) eu-north-1',)
-AWS_S3_CUSTOM_DOMAIN = f'{my-django-media-files}.s3.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = f'my-django-media-files.s3.amazonaws.com'
 
 # Media Files Configuration
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
