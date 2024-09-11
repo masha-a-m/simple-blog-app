@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-
-load_dotenv()  # Load environment variables from a .env file if using locally
 
 # AWS S3 Bucket Settings
 AWS_ACCESS_KEY_ID = os.getenv('AKIASE5KQ3VNADKMKJIB')
