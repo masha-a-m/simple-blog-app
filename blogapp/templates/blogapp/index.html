@@ -13,15 +13,17 @@
 <!-- Blog entries-->
 <div class="col-lg-8">
     <!-- Featured blog post-->
+    {% for trend in trending %}
     <div class="card mb-4">
-        <a href="#!"><img class="card-img-top img-fluid rounded" src="{{trending.image.url}}" alt="..." /></a>
+        <a href="#!"><img class="card-img-top img-fluid rounded" src="{{trend.image.url}}" alt="..." /></a>
         <div class="card-body">
-            <div class="small text-muted">{{trending.date}}</div>
-            <h2 class="card-title">{{trending.title}}</h2>
-            <p class="card-text">{{trending.body | truncatechars:"300"}}</p>
-            <a class="btn btn-primary" href="{% url 'readmore' trending.slug %}">Read more →</a>
+            <div class="small text-muted">{{trend.date}}</div>
+            <h2 class="card-title">{{trend.title}}</h2>
+            <p class="card-text">{{trend.body | truncatechars:"300"}}</p>
+            <a class="btn btn-primary" href="{% url 'readmore' trend.slug %}">Read more →</a>
         </div>
     </div>
+    {% endfor %}
     <!-- Nested row for non-featured blog posts-->
     <div class="row">
         {% for posts in posts %}
