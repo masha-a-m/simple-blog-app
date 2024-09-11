@@ -12,6 +12,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from a .env file if using locally
+
+# AWS S3 Bucket Settings
+AWS_ACCESS_KEY_ID = os.getenv('AKIASE5KQ3VNADKMKJIB')
+AWS_SECRET_ACCESS_KEY = os.getenv('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')
+AWS_STORAGE_BUCKET_NAME = os.getenv('my-django-media-files')
+AWS_S3_REGION_NAME = os.getenv('Europe (Stockholm) eu-north-1',)
+AWS_S3_CUSTOM_DOMAIN = f'{my-django-media-files}.s3.amazonaws.com'
+
+# Media Files Configuration
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f'https://{my-django-media-files}.s3.amazonaws.com/media/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -128,6 +142,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [BASE_DIR/'static']
 
 
