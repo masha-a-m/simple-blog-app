@@ -12,12 +12,30 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
+
+
+
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'storages',
+    'blogapp'
+]
 
 # AWS S3 Bucket Settings
 AWS_ACCESS_KEY_ID = os.getenv('AKIASE5KQ3VNADKMKJIB')
 AWS_SECRET_ACCESS_KEY = os.getenv('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')
 AWS_STORAGE_BUCKET_NAME = os.getenv('my-django-media-files')
-AWS_S3_REGION_NAME = os.getenv('Europe (Stockholm) eu-north-1',)
+AWS_S3_REGION_NAME = os.getenv('eu-north-1')
 AWS_S3_CUSTOM_DOMAIN = f'my-django-media-files.s3.amazonaws.com'
 
 # Media Files Configuration
@@ -41,17 +59,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1:8001', 'simpleblogapp-d7dbdee0e375.herokuapp.com', 'afternoon-headland-76932-22b7bcf4c9f9.herokuapp.com']
 
 
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'blogapp'
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
