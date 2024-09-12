@@ -9,7 +9,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
     slug = models.SlugField()
-    image = models.ImageField( upload_to = 'pics', default = 'static/image/fs1.jpg')
+    image = models.ImageField( upload_to = 'images/', default = 'static/image/')
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, null = True, blank=True)
     trending = models.BooleanField(default = False)
     date = models.DateTimeField(auto_now_add=True)

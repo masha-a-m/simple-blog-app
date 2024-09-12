@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -36,11 +39,34 @@ AWS_ACCESS_KEY_ID = os.getenv('AKIASE5KQ3VNADKMKJIB')
 AWS_SECRET_ACCESS_KEY = os.getenv('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')
 AWS_STORAGE_BUCKET_NAME = os.getenv('my-django-media-files')
 AWS_S3_REGION_NAME = os.getenv('eu-north-1')
-AWS_S3_CUSTOM_DOMAIN = f'my-django-media-files.s3.amazonaws.com'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_CUSTOM_DOMAIN = f'{my-django-media-files}.s3.amazonaws.com'
 
 # Media Files Configuration
+MEDIAFILES_LOCATION = "media"
+MEDIA_URL = f'https://{my-django-media-files.s3.amazonaws.com}/media/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-MEDIA_URL = f'https://my-django-media-files.s3.amazonaws.com/media/'
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATICFILES_LOCATION = 'static'
+STATIC_URL = f'https://{my-django-media-files.s3.amazonaws.com}/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_DIRS = [BASE_DIR/'static']
+
+
+STORAGES = {
+    "default": {"BACKEND": "myblog.custom_storage.MediaStorage"},
+    "staticfiles": {"BACKEND": "myblog.custom_storage.StaticStorage"},
+}
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=2592000",
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -141,13 +167,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_DIRS = [BASE_DIR/'static']
 
 
 
