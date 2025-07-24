@@ -1,10 +1,6 @@
-from django.conf import settings
+# myblog/custom_storage.py
+
 from storages.backends.s3boto3 import S3Boto3Storage
 
 class StaticStorage(S3Boto3Storage):
-    location = settings.static
-    querystring_auth = False
-
-class MediaStorage(S3Boto3Storage):
-    location = settings.media
-    file_overwrite = False
+    location = 'static'
